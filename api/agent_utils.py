@@ -53,10 +53,10 @@ llm_with_tools = llm.bind(
     functions=[format_tool_to_openai_function(t) for t in tools]
 )
 
-agent_executor = initialize_agent(tools, llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION, verbose=True, handle_parsing_errors=True, return_intermediate_steps=True, agent_instructions= "Use the 'Document_Search' tool first. Only use other tools after that.")
+agent_executor = initialize_agent(tools, llm, agent=AgentType.STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION, verbose=True, handle_parsing_errors=True, return_intermediate_steps=True, agent_instructions= "Use the 'Document_Search' tool first. Only use other tools after that.")
 
 def invoke_agent(query):
-    a = agent_executor.invoke({"input": query})
+    a = agent_executor.ainvoke({"input": query})
     result = {}
     last_tool = a["intermediate_steps"][-1][0].to_json()["kwargs"]["tool"]
     if last_tool == "_Exception":

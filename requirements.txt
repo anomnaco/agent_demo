@@ -1,6 +1,6 @@
 fastapi
 uvicorn[standard]
-openai
+tiktoken
 openai==0.28.1
-langchain==0.0.317
+langchain==0.0.331
 google-search-results
